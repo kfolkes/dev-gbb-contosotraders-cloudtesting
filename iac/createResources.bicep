@@ -1454,7 +1454,7 @@ resource jumpboxvm 'Microsoft.Compute/virtualMachines@2022-08-01' =
     tags: resourceTags
     properties: {
       hardwareProfile: {
-        vmSize: 'standard_b2ms'
+        vmSize: 'standard_d1'
       }
       storageProfile: {
         osDisk: {
