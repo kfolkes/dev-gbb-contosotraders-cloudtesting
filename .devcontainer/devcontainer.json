@@ -9,6 +9,12 @@
 		"ghcr.io/devcontainers-contrib/features/npm-package:1": {
 			"package": "typescript",
 			"version": "latest"
-		}
+		},
+		"ghcr.io/devcontainers-contrib/features/npm-package:1": {
+				// See https://containers.dev/features for list of features
+				"ghcr.io/devcontainers/features/docker-in-docker:2": {
+				},
+				"ghcr.io/azure/azure-dev/azd:latest": {}
+			}	
 	}
 }
