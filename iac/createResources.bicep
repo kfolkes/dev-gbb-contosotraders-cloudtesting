@@ -15,7 +15,7 @@ param suffix string
 param sqlPassword string // @TODO: Obviously, we need to fix this!
 
 param resourceLocation string = resourceGroup().location
-param appResourceLocation string = "canadacentral"
+param appResourceLocation string = 'canadacentral'
 // tenant
 param tenantId string = subscription().tenantId
 
