@@ -15,7 +15,7 @@ param suffix string
 param sqlPassword string // @TODO: Obviously, we need to fix this!
 
 param resourceLocation string = resourceGroup().location
-
+param appResourceLocation string = "canadacentral"
 // tenant
 param tenantId string = subscription().tenantId
 
@@ -484,7 +484,7 @@ resource cartsdba 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' = {
 // app service plan (linux)
 resource productsapiappsvcplan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: productsApiAppSvcPlanName
-  location: canadacentral
+  location: appResourceLocation
   tags: resourceTags
   sku: {
     name: 'B1'
@@ -498,7 +498,7 @@ resource productsapiappsvcplan 'Microsoft.Web/serverfarms@2022-03-01' = {
 // app service
 resource productsapiappsvc 'Microsoft.Web/sites@2022-03-01' = {
   name: productsApiAppSvcName
-  location: canadacentral
+  location: appResourceLocation
   tags: resourceTags
   identity: {
     type: 'UserAssigned'
