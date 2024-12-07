@@ -13,7 +13,7 @@ env:
   KV_NAME: contosotraderskv
   LOAD_TEST_SERVICE_NAME: contoso-traders-loadtest
   PRODUCTS_ACR_REPOSITORY_NAME: contosotradersapiproducts
-  RESOURCE_GROUP_NAME: contoso-traders-rg
+  RESOURCE_GROUP_NAME: Krystal-contoso-traders-rg-gbb
 
 jobs:
   aks-cost-optimization:
