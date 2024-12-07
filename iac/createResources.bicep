@@ -484,7 +484,7 @@ resource cartsdba 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' = {
 // app service plan (linux)
 resource productsapiappsvcplan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: productsApiAppSvcPlanName
-  location: resourceLocation
+  location: canadacentral
   tags: resourceTags
   sku: {
     name: 'B1'
@@ -498,7 +498,7 @@ resource productsapiappsvcplan 'Microsoft.Web/serverfarms@2022-03-01' = {
 // app service
 resource productsapiappsvc 'Microsoft.Web/sites@2022-03-01' = {
   name: productsApiAppSvcName
-  location: resourceLocation
+  location: canadacentral
   tags: resourceTags
   identity: {
     type: 'UserAssigned'
