@@ -168,24 +168,27 @@ jobs:
             az vmss identity assign \
               --identities $(az identity show -g ${{ env.RESOURCE_GROUP_NAME }}${{ vars.SUFFIX }} --name ${{ env.USER_ASSIGNED_MANAGED_IDENTITY_NAME }}${{ vars.SUFFIX }} --query "id" -o tsv) \
               --ids $(az vmss list -g ${{ env.AKS_NODES_RESOURCE_GROUP_NAME }}${{ vars.SUFFIX }} --query "[0].id" -o tsv) \
+      
+      
+      
       # Seed the DBs and storage accounts
-      - name: seed products db
-        uses: azure/sql-action@v2.2
-        with:
-          connection-string: Server=tcp:${{ env.PRODUCTS_DB_SERVER_NAME }}${{ vars.SUFFIX }}.database.windows.net,1433;Initial Catalog=${{ env.PRODUCTS_DB_NAME }};Persist Security Info=False;User ID=${{ env.PRODUCTS_DB_USER_NAME }};Password=${{ secrets.SQLPASSWORD }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
-          path: ./src/ContosoTraders.Api.Products/Migration/productsdb.sql
-      - name: seed product image (product details)
-        uses: azure/CLI@v1
-        with:
-          inlineScript: az storage blob sync --account-name '${{ env.PRODUCT_IMAGES_STORAGE_ACCOUNT_NAME }}${{ vars.SUFFIX }}' -c '${{ env.PRODUCT_DETAILS_CONTAINER_NAME }}' -s 'src/ContosoTraders.Api.Images/product-details'
-      - name: seed product image (product list)
-        uses: azure/CLI@v1
-        with:
-          inlineScript: az storage blob sync --account-name '${{ env.PRODUCT_IMAGES_STORAGE_ACCOUNT_NAME }}${{ vars.SUFFIX }}' -c '${{ env.PRODUCT_LIST_CONTAINER_NAME }}' -s 'src/ContosoTraders.Api.Images/product-list'
-      - name: purge product images cdn endpoint
-        uses: azure/CLI@v1
-        with:
-          inlineScript: az cdn endpoint purge --no-wait --content-paths '/*' -n '${{ env.PRODUCTS_CDN_ENDPOINT_NAME }}${{ vars.SUFFIX }}' -g '${{ env.RESOURCE_GROUP_NAME }}${{ vars.SUFFIX }}' --profile-name '${{ env.CDN_PROFILE_NAME }}${{ vars.SUFFIX }}'
+      #- name: seed products db
+       # uses: azure/sql-action@v2.2
+        #with:
+         # connection-string: Server=tcp:${{ env.PRODUCTS_DB_SERVER_NAME }}${{ vars.SUFFIX }}.database.windows.net,1433;Initial Catalog=${{ env.PRODUCTS_DB_NAME }};Persist Security Info=False;User ID=${{ env.PRODUCTS_DB_USER_NAME }};Password=${{ secrets.SQLPASSWORD }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+          #path: ./src/ContosoTraders.Api.Products/Migration/productsdb.sql
+     # - name: seed product image (product details)
+      #  uses: azure/CLI@v1
+#        with:
+ #         inlineScript: az storage blob sync --account-name '${{ env.PRODUCT_IMAGES_STORAGE_ACCOUNT_NAME }}${{ vars.SUFFIX }}' -c '${{ env.PRODUCT_DETAILS_CONTAINER_NAME }}' -s 'src/ContosoTraders.Api.Images/product-details'
+  #    - name: seed product image (product list)
+   #     uses: azure/CLI@v1
+    #    with:
+     #     inlineScript: az storage blob sync --account-name '${{ env.PRODUCT_IMAGES_STORAGE_ACCOUNT_NAME }}${{ vars.SUFFIX }}' -c '${{ env.PRODUCT_LIST_CONTAINER_NAME }}' -s 'src/ContosoTraders.Api.Images/product-list'
+      #- name: purge product images cdn endpoint
+       # uses: azure/CLI@v1
+        #with:
+         # inlineScript: az cdn endpoint purge --no-wait --content-paths '/*' -n '${{ env.PRODUCTS_CDN_ENDPOINT_NAME }}${{ vars.SUFFIX }}' -g '${{ env.RESOURCE_GROUP_NAME }}${{ vars.SUFFIX }}' --profile-name '${{ env.CDN_PROFILE_NAME }}${{ vars.SUFFIX }}'
       - name: extract acr password
         uses: azure/CLI@v1
         id: extract-acr-password
