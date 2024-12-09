@@ -129,13 +129,13 @@ jobs:
         with:
           creds: ${{ secrets.SERVICEPRINCIPAL }}
       # section #1: provisioning the resources on Azure using bicep templates
-      - name: create resource group
-        uses: Azure/arm-deploy@v2
-        with:
-          scope: subscription
-          region: ${{ vars.DEPLOYMENTREGION }}
-          template: ./iac/createResourceGroup.bicep
-          parameters: rgName=${{ env.RESOURCE_GROUP_NAME }} suffix=${{ vars.SUFFIX }} rgLocation=${{ vars.DEPLOYMENTREGION }}
+     # - name: create resource group
+     #   uses: Azure/arm-deploy@v2
+     #   with:
+      #    scope: subscription
+      #    region: ${{ vars.DEPLOYMENTREGION }}
+      #    template: ./iac/createResourceGroup.bicep
+      #    parameters: rgName=${{ env.RESOURCE_GROUP_NAME }} suffix=${{ vars.SUFFIX }} rgLocation=${{ vars.DEPLOYMENTREGION }}
       - name: create resources
         uses: Azure/arm-deploy@v2
         with:
